@@ -1,17 +1,17 @@
-package com.example.biblioteca.modules;
+package com.example.biblioteca;
 
 public class BookSearchModel {
 
     int id;
     String titolo;
     String autore;
-    String tipologia;
+    String genere;
 
-    public BookSearchModel(int id, String titolo, String autore, String tipologia) {
+    public BookSearchModel(int id, String titolo, String autore, String genere) {
         this.id = id;
         this.titolo = titolo;
         this.autore = autore;
-        this.tipologia = tipologia;
+        this.genere = genere;
     }
 
     public int getId() {
@@ -38,11 +38,11 @@ public class BookSearchModel {
         this.autore = autore;
     }
 
-    public String getTipologia() {
-        return tipologia;
+    public String getGenere() {
+        return genere;
     }
 
-    public void setTipologia(String tipologia) {
-        this.tipologia = tipologia;
+    public void setGenere(String genere) {
+        this.genere = genere;
     }
 }

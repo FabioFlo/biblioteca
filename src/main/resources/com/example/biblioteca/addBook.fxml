@@ -1,14 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
-</AnchorPane>
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biblioteca.AddBookController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="87.0" prefWidth="374.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Scheda Libro" textAlignment="CENTER" wrappingWidth="341.6318359375">
+               <font>
+                  <Font name="Book Antiqua" size="45.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <effect>
+                  <DropShadow color="#ccddff" />
+               </effect>
+            </Text>
+         </children>
+      </HBox>
+      <Pane prefHeight="6.0" prefWidth="374.0" style="-fx-background-color: black;" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TITOLO" textAlignment="CENTER" wrappingWidth="187.13671875">
+         <font>
+            <Font name="Book Antiqua Bold" size="20.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <TextField fx:id="textTitle" prefHeight="25.0" prefWidth="312.0">
+         <font>
+            <Font name="Book Antiqua" size="20.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" top="2.0" />
+         </VBox.margin>
+         <effect>
+            <DropShadow color="#ccddff" />
+         </effect></TextField>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="AUTORE" textAlignment="CENTER" wrappingWidth="187.13671875">
+         <font>
+            <Font name="Book Antiqua Bold" size="20.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <TextField fx:id="textAuthor" prefHeight="40.0" prefWidth="357.0">
+         <font>
+            <Font name="Book Antiqua" size="20.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" top="2.0" />
+         </VBox.margin>
+         <effect>
+            <DropShadow color="#ccddff" />
+         </effect></TextField>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GENERE" textAlignment="CENTER" wrappingWidth="187.13671875">
+         <font>
+            <Font name="Book Antiqua Bold" size="20.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <TextField fx:id="textGenere">
+         <font>
+            <Font name="Book Antiqua" size="20.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" top="2.0" />
+         </VBox.margin>
+         <effect>
+            <DropShadow color="#ccddff" />
+         </effect></TextField>
+      <Button fx:id="saveBookButton" mnemonicParsing="false" onKeyPressed="#saveBookKey" onMouseClicked="#saveBook" prefHeight="48.0" prefWidth="114.0" text="Salva" textFill="#1271a1">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="20.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <effect>
+            <InnerShadow color="#1271a1" height="25.0" radius="18.25" width="50.0" />
+         </effect>
+      </Button>
+      <HBox prefHeight="11.0" prefWidth="374.0" />
+      <Button fx:id="closeAddBookButton" mnemonicParsing="false" onKeyPressed="#closeAddBookKey" onMouseClicked="#closeAddBook" prefHeight="48.0" prefWidth="114.0" text="Chiudi" textFill="#ff0707">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="20.0" />
+         </font>
+         <effect>
+            <InnerShadow color="#ff0707" height="37.5" radius="21.375" width="50.0" />
+         </effect>
+      </Button>
+   </children>
+</VBox>
