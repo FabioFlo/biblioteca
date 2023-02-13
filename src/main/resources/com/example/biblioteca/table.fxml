@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biblioteca.TableViewBooksController">
+   <top>
+      <BorderPane prefHeight="78.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
+         <top>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Biblioteca" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Castellar" size="35.0" />
+               </font>
+            </Text>
+         </top>
+         <right>
+            <Button fx:id="closeButton" mnemonicParsing="false" onMouseClicked="#close" prefHeight="29.0" prefWidth="31.0" text="X" textFill="#f20909" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="10.0" top="-45.0" />
+               </BorderPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </right>
+         <bottom>
+            <HBox prefHeight="30.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="80.0" text="Cerca">
+                     <font>
+                        <Font name="Castellar" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></Label>
+                  <TextField fx:id="textField" prefHeight="25.0" prefWidth="970.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></TextField>
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </top>
+   <center>
+      <TableView fx:id="booksTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="booksColumnID" maxWidth="100.0" text="ID" />
+          <TableColumn fx:id="booksColumnTITLE" maxWidth="680.0" prefWidth="410.0" text="TITOLO" />
+            <TableColumn fx:id="booksColumnAUTHOR" maxWidth="400.0" prefWidth="260.0" text="AUTORE" />
+            <TableColumn fx:id="booksColumnTYPE" maxWidth="210.0" prefWidth="180.0" text="GENERE" />
+        </columns>
+      </TableView>
+   </center>
+   <right>
+      <VBox prefHeight="300.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="addButton" mnemonicParsing="false" onMouseClicked="#getAddBookView" prefHeight="300.0" prefWidth="150.0" text="Nuovo Libro">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@book.jpg" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="reloadButton" mnemonicParsing="false" onMouseClicked="#getAllBooks" prefHeight="300.0" prefWidth="150.0" text="Ricarica Lista">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@reload.png" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="updateButton" mnemonicParsing="false" onMouseClicked="#updateBook" prefHeight="300.0" prefWidth="150.0" text="Modifica Libro">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@update.jpg" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteBook" prefHeight="300.0" prefWidth="150.0" text="Elimina Libro">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@delete.png" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>
