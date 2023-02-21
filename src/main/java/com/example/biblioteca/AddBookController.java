@@ -106,6 +106,9 @@ public class AddBookController implements Initializable {
 //        } else {
         this.setQuery();
         this.insert();
+        textTitle.setText("");
+        textAuthor.setText("");
+        textGenere.setText("");
 //    }
 
 }
