@@ -106,6 +106,9 @@ public class AddBookController implements Initializable {
 //        } else {
         this.setQuery();
         this.insert();
+        textTitle.setText("");
+        textAuthor.setText("");
+        textGenere.setText("");
 //    }
 
 }
@@ -113,11 +116,28 @@ public class AddBookController implements Initializable {
     private void insert() throws ClassNotFoundException {
         connection = database.getDbConnection();
         try {
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, textTitle.getText());
-            preparedStatement.setString(2, textAuthor.getText());
-            preparedStatement.setString(3, textGenere.getText());
-            preparedStatement.execute();
+            // Retrieve the last inserted ID
+            int lastInsertedId = 0; // Initialize with a default value
+            String getLastIdQuery = "SELECT MAX(ID) FROM libri";
+            try (PreparedStatement getLastIdStatement = connection.prepareStatement(getLastIdQuery);
+                 ResultSet resultSet = getLastIdStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    lastInsertedId = resultSet.getInt(1);
+                }
+            }
+
+            // Increment the last inserted ID to get the new ID
+            int newId = lastInsertedId + 1;
+
+            // Prepare and execute the INSERT statement
+            String insertQuery = "INSERT INTO libri (ID, titolo, autore, genere) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+                preparedStatement.setInt(1, newId);
+                preparedStatement.setString(2, textTitle.getText());
+                preparedStatement.setString(3, textAuthor.getText());
+                preparedStatement.setString(4, textGenere.getText());
+                preparedStatement.execute();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="biblio" uuid="4a39fe60-30f4-494e-bef1-4e9f6717da0a">
-      <driver-ref>sqlite.xerial</driver-ref>
+    <data-source source="LOCAL" name="libreria@localhost" uuid="044e6baa-4bb4-4004-80bf-90f3fd526f40">
+      <driver-ref>h2.unified</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\sqlite\biblio.db</jdbc-url>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:tcp://localhost:8082/libreria</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
