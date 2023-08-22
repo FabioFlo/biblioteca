@@ -1,0 +1,10 @@
+
+`	java:S112N"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112}"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+V	java:S125"<This block of commented-out lines of code should be removed.( öñ’ÿÿÿÿÿ
+E
+java:S1172@"/Remove this unused method parameter "keyEvent".(–ïÔï
+V	java:S125e"<This block of commented-out lines of code should be removed.(¯öà¢ÿÿÿÿÿ
+V	java:S125p"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ
+D
+java:S1144E".Remove this unused private "bookExist" method.(ÄÆ°—

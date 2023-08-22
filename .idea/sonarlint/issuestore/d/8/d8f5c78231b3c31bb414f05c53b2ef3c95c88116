@@ -1,0 +1,16 @@
+
+g	java:S112."FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ö­ºä0
+m
+java:S1104"RMake dbLink a static final constant or non-public and provide accessors if needed.(éæóõıÿÿÿÿ
+]
+java:S2095I"GUse try-with-resources or close this "Statement" in a "finally" clause.(‹½»
+]
+java:S2095="GUse try-with-resources or close this "Statement" in a "finally" clause.(‹½»
+Q	java:S125"<This block of commented-out lines of code should be removed.(òŸº
+Q	java:S125"<This block of commented-out lines of code should be removed.(‡ıÏ
+J
+java:S4925$"-Remove this "Class.forName()", it is useless.(›‡ªœ8­ºä0
+K
+java:S2115%")Add password protection to this database.(‹¦›úÿÿÿÿ8­ºä0
+Q	java:S125R"<This block of commented-out lines of code should be removed.(éŞŸú
+Q	java:S125]"<This block of commented-out lines of code should be removed.(ûäüÆ
