@@ -22,6 +22,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -46,7 +47,15 @@ public class TableViewBooksController implements Initializable {
     @FXML
     private TableColumn<BookSearchModel, String> booksColumnAUTHOR;
     @FXML
-    private TableColumn<BookSearchModel, String> booksColumnTYPE;
+    private TableColumn<BookSearchModel, Double> booksColumnPREZZO;
+    @FXML
+    private TableColumn<BookSearchModel, String> booksColumnDISPONIBILE;
+    @FXML
+    private TableColumn<BookSearchModel, String> booksColumnUTENTE;
+    @FXML
+    private TableColumn<BookSearchModel, Date> booksColumnDATAPRES;
+    @FXML
+    private TableColumn<BookSearchModel, Date> booksColumnDATAFINE;
 
     // ################################## SEARCH TEXT BAR ############################ //
     @FXML
@@ -77,12 +86,11 @@ public class TableViewBooksController implements Initializable {
             booksColumnID.setCellValueFactory(new PropertyValueFactory<>("id"));
             booksColumnTITLE.setCellValueFactory(new PropertyValueFactory<>("titolo"));
             booksColumnAUTHOR.setCellValueFactory(new PropertyValueFactory<>("autore"));
-            booksColumnTYPE.setCellValueFactory(new PropertyValueFactory<>("genere"));
-//            booksColumnID.maxWidthProperty().bind(booksTable.widthProperty().divide(14));
-//            booksColumnTITLE.prefWidthProperty().bind(booksTable.widthProperty().divide(3));
-//            booksColumnAUTHOR.prefWidthProperty().bind(booksTable.widthProperty().divide(5));
-//            booksColumnTYPE.prefWidthProperty().bind(booksTable.widthProperty().divide(6));
-
+            booksColumnPREZZO.setCellValueFactory(new PropertyValueFactory<>("prezzo"));
+            booksColumnDISPONIBILE.setCellValueFactory(new PropertyValueFactory<>("disponibile"));
+            booksColumnUTENTE.setCellValueFactory(new PropertyValueFactory<>("utente"));
+            booksColumnDATAPRES.setCellValueFactory(new PropertyValueFactory<>("dataPrestito"));
+            booksColumnDATAFINE.setCellValueFactory(new PropertyValueFactory<>("dataFine"));
 
             booksTable.setItems(bookSearchModels);
 
@@ -96,9 +104,8 @@ public class TableViewBooksController implements Initializable {
 
                 if (bookSearchModel.getTitolo().toLowerCase().contains(searchKeyword)) {
                     return true; // La ricerca ha prodotto un risultrato
-                } else if (bookSearchModel.getAutore().toLowerCase().contains(searchKeyword)) {
-                    return true;
-                } else return bookSearchModel.getGenere().toLowerCase().contains(searchKeyword);
+                } else return (bookSearchModel.getAutore().toLowerCase().contains(searchKeyword));
+
 
             }));
 
@@ -116,11 +123,16 @@ public class TableViewBooksController implements Initializable {
         ResultSet queryOut = statement.executeQuery(getAllQuery);
         while (queryOut.next()) {
             int id = queryOut.getInt("id");
+            String disponibile = queryOut.getString("disponibile");
             String titolo = queryOut.getString("titolo");
             String autore = queryOut.getString("autore");
-            String tipologia = queryOut.getString("genere");
+            String prezzo = queryOut.getString("prezzo");
+            String utente = queryOut.getString("utente");
+            Date dataPrestito = queryOut.getDate("dataprestito");
+            Date dataFine = queryOut.getDate("datafine");
 
-            bookSearchModels.add(new BookSearchModel(id, titolo, autore, tipologia));
+
+            bookSearchModels.add(new BookSearchModel(id, disponibile,titolo, autore,prezzo,utente,dataPrestito,dataFine));
         }
     }
 
@@ -166,8 +178,8 @@ public class TableViewBooksController implements Initializable {
 
             AddBookController addBookController = loader.getController();
             addBookController.setUpdate(true);
-            addBookController.setTextField(book.getId(), book.getTitolo(),
-                    book.getAutore(), book.getGenere());
+            addBookController.setBookTextField(book.getId(), book.getTitolo(),
+                    book.getAutore(), book.getPrezzo());
             Parent parent = loader.getRoot();
             Stage stage = new Stage();
             stage.setScene(new Scene(parent));
@@ -211,6 +223,34 @@ public class TableViewBooksController implements Initializable {
     }
 
 
+    public void getTotRaccoltoView(MouseEvent mouseEvent) {
+    }
+
+    public void noleggiaBook(MouseEvent mouseEvent) {
+        book = booksTable.getSelectionModel().getSelectedItem();
+        if (book != null ) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("noleggiaBook.fxml"));
+            try {
+                loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(TableViewBooksController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            AddBookController addBookController = loader.getController();
+            //addBookController.setUpdate(true);
+            if (book.utente != null && book.dataPrestito != null && book.dataFine != null) {
+                addBookController.setBookPrestitoTextField(book.getUtente(), book.getDataFine());
+            }
+            Parent parent = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nessun libro selezionato");
+        }
+    }
 }
 
 //    public void addDell() {

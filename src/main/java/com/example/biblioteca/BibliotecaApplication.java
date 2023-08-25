@@ -11,7 +11,7 @@ public class BibliotecaApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BibliotecaApplication.class.getResource("table.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1080, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 1290, 698);
 //        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setTitle("Ricerca Libri");
         stage.setScene(scene);

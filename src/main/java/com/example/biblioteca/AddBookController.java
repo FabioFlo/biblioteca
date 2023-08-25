@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -36,13 +38,18 @@ public class AddBookController implements Initializable {
 
     }
 
+
     // ################################## GUI ADD BOOK ATTRIBUTES ############################ //
     @FXML
     private TextField textTitle;
     @FXML
     private TextField textAuthor;
     @FXML
-    private TextField textGenere;
+    private TextField textUtente;
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private TextField textPrezzo;
 
     // ################################# MOUSE AND BUTTON EVENTS ################################ //
     @FXML
@@ -89,42 +96,89 @@ public class AddBookController implements Initializable {
         connection = database.getDbConnection();
         String titolo = textTitle.getText();
         String autore = textAuthor.getText();
-        String genere = textGenere.getText();
+        String prezzo = this.cleanDoubleValueToString(textPrezzo.getText());
         if ((titolo.isEmpty() || titolo.isBlank()) ||
                 (autore.isEmpty() || autore.isBlank()) ||
-                (genere.isEmpty() || genere.isBlank())) {
+                (prezzo.isEmpty() || prezzo.isBlank())) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Inserisci tutti i dati");
             alert.showAndWait();
         }
-//        else if (bookExist(titolo)) {
-//            Alert alert = new Alert(AlertType.ERROR);
-//            alert.setHeaderText(null);
-//            alert.setContentText("Titolo già presente in archivio");
-//            alert.showAndWait();
-//        } else {
         this.setQuery();
         this.insert();
         textTitle.setText("");
         textAuthor.setText("");
-        textGenere.setText("");
-//    }
+        textPrezzo.setText("");
 
-}
+    }
+
+    private String cleanDoubleValueToString(String prezzo) {
+        return prezzo.replaceAll("[^\\d.]", "");
+
+    }
+
+    private Double cleanDoubleValue(String prezzo) {
+        return Double.parseDouble(prezzo);
+    }
+
+    private void savePrestito() throws ClassNotFoundException {
+        connection = database.getDbConnection();
+        // necessario metodo per aggiornare nella tabella tot ricavi il dato totricavi
+        // è anche necessario creare un controllo per verificare l'anno in questione
+        Double prezzo = cleanDoubleValue(textPrezzo.getText());
+
+        String utente = textUtente.getText();
+        String dataPrestito = LocalDate.now().toString();
+        String dataFine = datePicker.toString();
+        String disponibile = "Non Disponibile";
+
+        if ((utente.isEmpty() || utente.isBlank()) ||
+                (dataFine.isEmpty() || dataFine.isBlank())) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Inserisci tutti i dati");
+            alert.showAndWait();
+        }
+
+        this.setQueryPrestito();
+        this.insertPrestito();
+        textUtente.setText("");
+        datePicker.setChronology(null);
+
+    }
+
+    private void insertPrestito() {
+
+    }
+
+    private void setQueryPrestito() {
+        if (!update) {
+            query = "INSERT INTO libri ( utente,  dataprestito, datafine, disponibile ) VALUES (?, ?, ?, ?, ?)";
+        } else {
+            query = "UPDATE libri SET "
+                    + " utente = ?,"
+                    + " dataprestito = ?,"
+                    + " datafine = ?,"
+                    + " disponibile = ?"
+                    + " WHERE id = " + bookId;
+        }
+    }
 
     private void insert() throws ClassNotFoundException {
         connection = database.getDbConnection();
-        try {
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, textTitle.getText());
-            preparedStatement.setString(2, textAuthor.getText());
-            preparedStatement.setString(3, textGenere.getText());
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+                try {
+                    preparedStatement = connection.prepareStatement(query);
+                    preparedStatement.setString(1, textTitle.getText());
+                    preparedStatement.setString(2, textAuthor.getText());
+                    preparedStatement.setString(3, textPrezzo.getText());
+                    preparedStatement.execute();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+
 
     void setUpdate(boolean b) {
         this.update = b;
@@ -132,20 +186,41 @@ public class AddBookController implements Initializable {
 
     private void setQuery() {
         if (!update) {
-            query = "INSERT INTO libri ( titolo, autore, genere ) VALUES (?, ?, ?)";
+            query = "INSERT INTO libri ( titolo, autore, prezzo ) VALUES (?, ?, ?)";
         } else {
             query = "UPDATE libri SET "
                     + " titolo = ?,"
                     + " autore = ?,"
-                    + " genere = ?"
+                    + " prezzo = ?"
                     + " WHERE id = " + bookId;
         }
     }
 
-    void setTextField(int id, String titolo, String autore, String genere) {
+    void setBookTextField(int id, String titolo, String autore, String prezzo) {
         bookId = id;
         textTitle.setText(titolo);
         textAuthor.setText(autore);
-        textGenere.setText(genere);
+        textPrezzo.setText(prezzo);
+    }
+    void setBookPrestitoTextField(String utente, Date dataFine) {
+        textUtente.setText(utente);
+        datePicker.setChronology(dataFine.toLocalDate().getChronology());
+    }
+
+    public void restituitoBookKey(KeyEvent keyEvent) {
+        // chiamo il metodo restituito book
+    }
+
+    public void restituitoBook(MouseEvent mouseEvent) {
+        // Modifico il libro settando nome, cognome, data fine, data inizio a null e disponibile = disponibile;
+
+    }
+
+    public void savePrestitoKey(KeyEvent keyEvent) {
+        // se chiamo questo metodo verifico utente e data fine siano stati passati altrimenti blocco
+        // se passo procedo modificando il libro aggiungendo SOLO quei dati e settando disponibile = Non disponibile
+    }
+
+    public void savePrestitoBook(MouseEvent mouseEvent) {
     }
 }

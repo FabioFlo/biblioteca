@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="vboxUtente" maxWidth="350.0" minWidth="350.0" prefHeight="309.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biblioteca.AddBookController">
+   <children>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dati noleggio" textAlignment="CENTER" wrappingWidth="351.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+         <effect>
+            <DropShadow color="#ccddff" />
+         </effect>
+      </Text>
+      <Pane prefHeight="6.0" prefWidth="374.0" style="-fx-background-color: black;" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NOME E COGNOME" textAlignment="CENTER" wrappingWidth="349.20001220703125">
+         <font>
+            <Font name="Book Antiqua Bold" size="20.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin>
+      </Text>
+      <TextField fx:id="textUtente" prefHeight="40.0" prefWidth="312.0">
+         <font>
+            <Font name="Book Antiqua" size="20.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <effect>
+            <DropShadow color="#ccddff" />
+         </effect>
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </VBox.margin>
+      </TextField>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DA RESTITUIRE ENTRO IL" textAlignment="CENTER" wrappingWidth="348.4000244140625">
+         <font>
+            <Font name="Book Antiqua Bold" size="20.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin>
+      </Text>
+      <DatePicker fx:id="datePicker" prefHeight="40.0" prefWidth="357.0" promptText="DATA FINE">
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </VBox.margin>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.800000011920929" green="0.8666666746139526" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
+      </DatePicker>
+      <HBox prefHeight="96.0" prefWidth="350.0">
+         <children>
+            <Button fx:id="savePrestitoButton" mnemonicParsing="false" onKeyPressed="#savePrestitoKey" onMouseClicked="#savePrestitoBook" prefHeight="48.0" prefWidth="115.0" text="Salva" textAlignment="CENTER" textFill="#1271a1">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="20.0" />
+               </font>
+               <effect>
+                  <InnerShadow color="#1271a1" height="25.0" radius="18.25" width="50.0" />
+               </effect>
+               <HBox.margin>
+                  <Insets left="35.0" top="25.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="closeAddBookButton" mnemonicParsing="false" onKeyPressed="#closeAddBookKey" onMouseClicked="#closeAddBook" prefHeight="48.0" prefWidth="115.0" text="Chiudi" textAlignment="CENTER" textFill="#ff0707">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="20.0" />
+               </font>
+               <effect>
+                  <InnerShadow color="#ff0707" height="37.5" radius="21.375" width="50.0" />
+               </effect>
+               <HBox.margin>
+                  <Insets left="50.0" top="25.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

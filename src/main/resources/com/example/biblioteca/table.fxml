@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biblioteca.TableViewBooksController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1290.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biblioteca.TableViewBooksController">
    <top>
       <BorderPane prefHeight="78.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
          <top>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Biblioteca" underline="true" BorderPane.alignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="BIBLIOTECA" underline="true" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Castellar" size="35.0" />
                </font>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" />
+               </BorderPane.margin>
             </Text>
          </top>
          <right>
@@ -37,20 +51,34 @@
          <bottom>
             <HBox prefHeight="30.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="27.0" prefWidth="80.0" text="Cerca">
-                     <font>
-                        <Font name="Castellar" size="20.0" />
-                     </font>
+                  <TextField fx:id="textField" prefHeight="35.0" prefWidth="914.0" promptText="Cerca">
                      <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin></Label>
-                  <TextField fx:id="textField" prefHeight="25.0" prefWidth="970.0">
-                     <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets bottom="5.0" left="10.0" />
                      </HBox.margin>
                      <effect>
                         <DropShadow />
-                     </effect></TextField>
+                     </effect>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets right="10.0" />
+                     </opaqueInsets></TextField>
+                  <Button fx:id="totRaccolto" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getTotRaccoltoView" prefHeight="36.0" prefWidth="150.0" snapToPixel="false" text="Totale raccolto" textAlignment="CENTER" textFill="#5b5b0b">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <effect>
+                        <InnerShadow height="37.5" radius="21.375" width="50.0">
+                           <color>
+                              <Color red="0.6235294342041016" green="0.6313725709915161" blue="0.07450980693101883" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
          </bottom>
@@ -59,10 +87,14 @@
    <center>
       <TableView fx:id="booksTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="booksColumnID" maxWidth="100.0" text="ID" />
-          <TableColumn fx:id="booksColumnTITLE" maxWidth="680.0" prefWidth="410.0" text="TITOLO" />
-            <TableColumn fx:id="booksColumnAUTHOR" maxWidth="400.0" prefWidth="260.0" text="AUTORE" />
-            <TableColumn fx:id="booksColumnTYPE" maxWidth="210.0" prefWidth="180.0" text="GENERE" />
+          <TableColumn fx:id="booksColumnID" maxWidth="40.0" prefWidth="35.0" resizable="false" text="ID" />
+            <TableColumn fx:id="booksColumnDISPONIBILE" maxWidth="100.0" prefWidth="100.0" text="DISPONIBILE" />
+          <TableColumn fx:id="booksColumnTITLE" maxWidth="322.0" minWidth="50.0" prefWidth="264.0" text="TITOLO" />
+            <TableColumn fx:id="booksColumnAUTHOR" maxWidth="250.0" minWidth="50.0" prefWidth="190.0" text="AUTORE" />
+            <TableColumn fx:id="booksColumnPREZZO" maxWidth="90.0" minWidth="20.0" prefWidth="90.0" resizable="false" text="PREZZO" />
+            <TableColumn fx:id="booksColumnUTENTE" maxWidth="200.0" minWidth="50.0" prefWidth="150.0" text="PRESTATO A" />
+            <TableColumn fx:id="booksColumnDATAPRES" maxWidth="150.0" minWidth="50.0" prefWidth="130.0" text="DATA PRESTITO" />
+            <TableColumn fx:id="booksColumnDATAFINE" maxWidth="150.0" minWidth="50.0" prefWidth="130.0" text="DATA FINE" />
         </columns>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -70,6 +102,9 @@
          <effect>
             <InnerShadow color="#6f8a19" />
          </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </TableView>
    </center>
    <right>
@@ -78,9 +113,8 @@
             <Button fx:id="addButton" mnemonicParsing="false" onMouseClicked="#getAddBookView" prefHeight="300.0" prefWidth="150.0" text="Nuovo" textFill="#1271a1">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@book.jpg" />
-                     </image></ImageView>
+                     <Image url="@book.jpg"/>
+                  </ImageView>
                </graphic>
                <font>
                   <Font name="Berlin Sans FB Demi Bold" size="14.0" />
@@ -106,9 +140,8 @@
             <Button fx:id="updateButton" mnemonicParsing="false" onMouseClicked="#updateBook" prefHeight="300.0" prefWidth="150.0" text="Modifica" textFill="#d03cab">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@update.jpg" />
-                     </image></ImageView>
+                     <Image url="@update.jpg"/>
+                  </ImageView>
                </graphic>
                <font>
                   <Font name="Berlin Sans FB Demi Bold" size="14.0" />
@@ -117,12 +150,28 @@
                   <InnerShadow color="#d03cab" height="25.0" radius="18.25" width="50.0" />
                </effect>
             </Button>
+            <Button fx:id="prestitoButton" mnemonicParsing="false" onMouseClicked="#noleggiaBook" prefHeight="300.0" prefWidth="150.0" text="Noleggia" textFill="#909027">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@update.jpg"/>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="37.5" radius="21.375" width="50.0">
+                     <color>
+                        <Color red="0.7607057094573975" green="0.8100000023841858" blue="0.23489999771118164" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
             <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteBook" prefHeight="300.0" prefWidth="150.0" text="Elimina" textFill="#ff0707">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@delete.png" />
-                     </image></ImageView>
+                     <Image url="@delete.png"/>
+                  </ImageView>
                </graphic>
                <font>
                   <Font name="Berlin Sans FB Demi Bold" size="14.0" />
@@ -132,6 +181,9 @@
                </effect>
             </Button>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </VBox>
    </right>
 </BorderPane>

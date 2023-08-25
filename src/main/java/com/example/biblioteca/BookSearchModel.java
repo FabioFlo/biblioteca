@@ -1,17 +1,37 @@
 package com.example.biblioteca;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 public class BookSearchModel {
 
     int id;
     String titolo;
     String autore;
-    String genere;
+    String disponibile;
+    String prezzo;
+    String utente;
+    Date dataPrestito;
+    Date dataFine;
 
-    public BookSearchModel(int id, String titolo, String autore, String genere) {
+
+
+
+    public BookSearchModel(int id, String titolo, String autore) {
         this.id = id;
         this.titolo = titolo;
         this.autore = autore;
-        this.genere = genere;
+    }
+
+    public BookSearchModel(int id, String disponibile, String titolo, String autore, String prezzo, String utente,Date dataPrestito, Date dataFine) {
+        this.id = id;
+        this.disponibile = disponibile;
+        this.titolo = titolo;
+        this.autore = autore;
+        this.prezzo  = prezzo;
+        this.utente = utente;
+        this.dataPrestito = dataPrestito;
+        this.dataFine = dataFine;
     }
 
     public int getId() {
@@ -38,11 +58,43 @@ public class BookSearchModel {
         this.autore = autore;
     }
 
-    public String getGenere() {
-        return genere;
+    public String getDisponibile() {
+        return disponibile;
     }
 
-    public void setGenere(String genere) {
-        this.genere = genere;
+    public void setDisponibile(String disponibile) {
+        this.disponibile = disponibile;
+    }
+
+    public String getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(String prezzo) {
+        this.prezzo = prezzo;
+    }
+
+    public String getUtente() {
+        return utente;
+    }
+
+    public void setUtente(String utente) {
+        this.utente = utente;
+    }
+
+    public Date getDataPrestito() {
+        return dataPrestito;
+    }
+
+    public void setDataPrestito(Date dataPrestito) {
+        this.dataPrestito = dataPrestito;
+    }
+
+    public Date getDataFine() {
+        return dataFine;
+    }
+
+    public void setDataFine(Date dataFine) {
+        this.dataFine = dataFine;
     }
 }
