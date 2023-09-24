@@ -126,12 +126,12 @@ public class AddBookController implements Initializable {
         connection = database.getDbConnection();
         // necessario metodo per aggiornare nella tabella tot ricavi il dato totricavi
         // è anche necessario creare un controllo per verificare l'anno in questione
-        Double prezzo = cleanDoubleValue(textPrezzo.getText());
+//        Double prezzo = cleanDoubleValue(textPrezzo.getText());
 
         String utente = textUtente.getText();
-        String dataPrestito = LocalDate.now().toString();
+       // String dataPrestito = LocalDate.now().toString();
         String dataFine = datePicker.toString();
-        String disponibile = "Non Disponibile";
+       // String disponibile = "Non Disponibile";
 
         if ((utente.isEmpty() || utente.isBlank()) ||
                 (dataFine.isEmpty() || dataFine.isBlank())) {
@@ -148,21 +148,32 @@ public class AddBookController implements Initializable {
 
     }
 
-    private void insertPrestito() {
+    private void insertPrestito() throws ClassNotFoundException {
 
+        connection = database.getDbConnection();
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, textUtente.getText());
+            preparedStatement.setString(2, Date.valueOf(LocalDate.now()).toString());
+            preparedStatement.setString(3, datePicker.getValue().toString());
+            preparedStatement.setString(4, "Non disponibile");
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setQueryPrestito() {
-        if (!update) {
-            query = "INSERT INTO libri ( utente,  dataprestito, datafine, disponibile ) VALUES (?, ?, ?, ?, ?)";
-        } else {
+//        if (!update) {
+//            query = "INSERT INTO libri ( utente, dataprestito, datafine, disponibile ) VALUES (?, ?, ?, ?, ?)";
+//        } else {
             query = "UPDATE libri SET "
                     + " utente = ?,"
                     + " dataprestito = ?,"
                     + " datafine = ?,"
                     + " disponibile = ?"
                     + " WHERE id = " + bookId;
-        }
+//        }
     }
 
     private void insert() throws ClassNotFoundException {
@@ -170,8 +181,9 @@ public class AddBookController implements Initializable {
                 try {
                     preparedStatement = connection.prepareStatement(query);
                     preparedStatement.setString(1, textTitle.getText());
-                    preparedStatement.setString(2, textAuthor.getText());
-                    preparedStatement.setString(3, textPrezzo.getText());
+                    preparedStatement.setString(2, "Disponibile");
+                    preparedStatement.setString(3, textAuthor.getText());
+                    preparedStatement.setString(4, textPrezzo.getText());
                     preparedStatement.execute();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -186,10 +198,11 @@ public class AddBookController implements Initializable {
 
     private void setQuery() {
         if (!update) {
-            query = "INSERT INTO libri ( titolo, autore, prezzo ) VALUES (?, ?, ?)";
+            query = "INSERT INTO libri (  titolo, disponibile, autore, prezzo ) VALUES (?, ?, ?, ?)";
         } else {
             query = "UPDATE libri SET "
                     + " titolo = ?,"
+                    + " disponibile = ?,"
                     + " autore = ?,"
                     + " prezzo = ?"
                     + " WHERE id = " + bookId;
@@ -202,8 +215,10 @@ public class AddBookController implements Initializable {
         textAuthor.setText(autore);
         textPrezzo.setText(prezzo);
     }
-    void setBookPrestitoTextField(String utente, Date dataFine) {
+    void setBookPrestitoTextField(int id, String utente, Date dataFine) {
+        bookId = id;
         textUtente.setText(utente);
+        // TODO: aggiungere nella scheda noleggiabook un field che mostri scritta la data fine
         datePicker.setChronology(dataFine.toLocalDate().getChronology());
     }
 
@@ -221,6 +236,7 @@ public class AddBookController implements Initializable {
         // se passo procedo modificando il libro aggiungendo SOLO quei dati e settando disponibile = Non disponibile
     }
 
-    public void savePrestitoBook(MouseEvent mouseEvent) {
+    public void savePrestitoBook(MouseEvent mouseEvent) throws ClassNotFoundException {
+        this.savePrestito();
     }
 }

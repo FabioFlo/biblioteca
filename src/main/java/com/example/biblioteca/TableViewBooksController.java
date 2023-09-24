@@ -22,7 +22,6 @@ import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -238,9 +237,9 @@ public class TableViewBooksController implements Initializable {
             }
 
             AddBookController addBookController = loader.getController();
-            //addBookController.setUpdate(true);
+            addBookController.setUpdate(true);
             if (book.utente != null && book.dataPrestito != null && book.dataFine != null) {
-                addBookController.setBookPrestitoTextField(book.getUtente(), book.getDataFine());
+                addBookController.setBookPrestitoTextField(book.getId(),book.getUtente(), book.getDataFine());
             }
             Parent parent = loader.getRoot();
             Stage stage = new Stage();
